@@ -2,30 +2,30 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>ASCII 서버 테스트</title>
+  <title>ASCII 서버 문자열 테스트</title>
 </head>
 <body>
-  <h1>ASCII 서버 호출</h1>
+  <h1>문자열 저장/불러오기</h1>
 
-  <input id="charInput" type="text" maxlength="1" placeholder="문자 입력">
-  <button onclick="saveChar()">저장</button>
-  <button onclick="getChar()">불러오기</button>
+  <input id="stringInput" type="text" placeholder="문자열 입력">
+  <button onclick="saveString()">저장</button>
+  <button onclick="getString()">불러오기</button>
 
   <p id="result"></p>
 
   <script>
     const baseUrl = "https://ascii-server.kimkwon1406.workers.dev";
 
-    async function saveChar() {
-      const char = document.getElementById("charInput").value;
+    async function saveString() {
+      const str = document.getElementById("stringInput").value;
       const res = await fetch(baseUrl + "/save", {
         method: "POST",
-        body: char
+        body: str
       });
       document.getElementById("result").innerText = await res.text();
     }
 
-    async function getChar() {
+    async function getString() {
       const res = await fetch(baseUrl + "/get");
       document.getElementById("result").innerText = await res.text();
     }
