@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>ASCII 서버 테스트</title>
+</head>
+<body>
+  <h1>ASCII 서버 호출</h1>
+
+  <input id="charInput" type="text" maxlength="1" placeholder="문자 입력">
+  <button onclick="saveChar()">저장</button>
+  <button onclick="getChar()">불러오기</button>
+
+  <p id="result"></p>
+
+  <script>
+    const baseUrl = "https://ascii-server.kimkwon1406.workers.dev";
+
+    async function saveChar() {
+      const char = document.getElementById("charInput").value;
+      const res = await fetch(baseUrl + "/save", {
+        method: "POST",
+        body: char
+      });
+      document.getElementById("result").innerText = await res.text();
+    }
+
+    async function getChar() {
+      const res = await fetch(baseUrl + "/get");
+      document.getElementById("result").innerText = await res.text();
+    }
+  </script>
+</body>
+</html>
