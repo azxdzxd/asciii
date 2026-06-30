@@ -2,33 +2,49 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>문자열 저장/불러오기 (줄바꿈 지원)</title>
+  <title>문자열 저장/불러오기 (비밀번호 지원)</title>
+  <style>
+    #ioBox {
+      white-space: pre-wrap; /* 줄바꿈 유지 */
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      width: 400px;
+      min-height: 150px;
+    }
+  </style>
 </head>
 <body>
   <h1>문자열 저장/불러오기</h1>
 
-  <!-- 여러 줄 입력 가능 -->
-  <textarea id="stringInput" rows="5" cols="40" placeholder="여러 줄 문자열 입력"></textarea><br>
+  <input id="passwordInput" type="password" placeholder="비밀번호 입력"><br><br>
+  <textarea id="ioBox" rows="8" cols="50" placeholder="여기에 입력하고, 불러온 결과도 표시됩니다"></textarea><br>
   <button onclick="saveString()">저장</button>
   <button onclick="getString()">불러오기</button>
 
-  <pre id="result"></pre> <!-- 줄바꿈 유지해서 출력 -->
-  
   <script>
     const baseUrl = "https://ascii-server.kimkwon1406.workers.dev";
 
     async function saveString() {
-      const str = document.getElementById("stringInput").value;
+      const password = document.getElementById("passwordInput").value;
+      const str = document.getElementById("ioBox").value;
+      const body = password + "\n" + str; // 첫 줄: 비밀번호, 이후: 문자열
+
       const res = await fetch(baseUrl + "/save", {
         method: "POST",
-        body: str
+        body: body
       });
-      document.getElementById("result").innerText = await res.text();
+      document.getElementById("ioBox").value = await res.text();
     }
 
     async function getString() {
-      const res = await fetch(baseUrl + "/get");
-      document.getElementById("result").innerText = await res.text();
+      const password = document.getElementById("passwordInput").value;
+
+      const res = await fetch(baseUrl + "/get", {
+        method: "POST",
+        body: password
+      });
+      document.getElementById("ioBox").value = await res.text();
     }
   </script>
 </body>
