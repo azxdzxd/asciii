@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>문자열 저장/불러오기 (비밀번호 지원)</title>
+  <title>문자열 저장/불러오기 (비밀번호 별도)</title>
   <style>
     #ioBox {
       white-space: pre-wrap; /* 줄바꿈 유지 */
@@ -12,13 +12,20 @@
       width: 400px;
       min-height: 150px;
     }
+    #passwordInput {
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <h1>문자열 저장/불러오기</h1>
 
+  <!-- 비밀번호 입력창 -->
   <input id="passwordInput" type="password" placeholder="비밀번호 입력"><br><br>
-  <textarea id="ioBox" rows="8" cols="50" placeholder="여기에 입력하고, 불러온 결과도 표시됩니다"></textarea><br>
+
+  <!-- 문자열 입력/출력창 -->
+  <textarea id="ioBox" rows="8" cols="50" placeholder="여기에 문자열 입력 또는 불러온 결과 표시"></textarea><br>
+
   <button onclick="saveString()">저장</button>
   <button onclick="getString()">불러오기</button>
 
