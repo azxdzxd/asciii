@@ -38,7 +38,7 @@
   <button onclick="getString()">불러오기</button>
 
   <!-- 응답 출력 영역 -->
-  <div id="responseBox">응답이 여기에 표시됩니다</div>
+  <div id="responseBox">응답 메시지가 여기에 표시됩니다</div>
 
   <script>
     const baseUrl = "https://ascii-server.kimkwon1406.workers.dev";
@@ -52,6 +52,7 @@
         method: "POST",
         body: body
       });
+      // 저장 결과는 아래 응답 박스에만 표시
       document.getElementById("responseBox").innerText = await res.text();
     }
 
@@ -61,7 +62,11 @@
         method: "POST",
         body: key
       });
-      document.getElementById("responseBox").innerText = await res.text();
+      const text = await res.text();
+      // 불러온 문자열은 입력창에 표시
+      document.getElementById("ioBox").value = text;
+      // 응답 메시지는 아래 박스에도 표시
+      document.getElementById("responseBox").innerText = "불러오기 완료";
     }
   </script>
 </body>
