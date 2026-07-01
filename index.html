@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>번호 기반 문자열 저장/불러오기</title>
+  <title>KV 기반 문자열 저장/불러오기</title>
   <style>
     #ioBox {
       white-space: pre-wrap;
@@ -15,19 +15,30 @@
     #keyInput {
       margin-bottom: 10px;
     }
+    #responseBox {
+      margin-top: 15px;
+      padding: 10px;
+      border: 1px solid #666;
+      background: #f9f9f9;
+      width: 400px;
+      min-height: 50px;
+    }
   </style>
 </head>
 <body>
-  <h1>번호 기반 문자열 저장/불러오기</h1>
+  <h1>KV 기반 문자열 저장/불러오기</h1>
 
   <!-- 번호 입력 -->
   <input id="keyInput" type="text" placeholder="문자열 번호 입력"><br>
 
-  <!-- 문자열 입력/출력 -->
-  <textarea id="ioBox" rows="8" cols="50" placeholder="저장할 문자열 입력 또는 불러온 결과 표시"></textarea><br>
+  <!-- 문자열 입력 -->
+  <textarea id="ioBox" rows="8" cols="50" placeholder="저장할 문자열 입력"></textarea><br>
 
   <button onclick="saveString()">저장</button>
   <button onclick="getString()">불러오기</button>
+
+  <!-- 응답 출력 영역 -->
+  <div id="responseBox">응답이 여기에 표시됩니다</div>
 
   <script>
     const baseUrl = "https://ascii-server.kimkwon1406.workers.dev";
@@ -41,7 +52,7 @@
         method: "POST",
         body: body
       });
-      document.getElementById("ioBox").value = await res.text();
+      document.getElementById("responseBox").innerText = await res.text();
     }
 
     async function getString() {
@@ -50,8 +61,9 @@
         method: "POST",
         body: key
       });
-      document.getElementById("ioBox").value = await res.text();
+      document.getElementById("responseBox").innerText = await res.text();
     }
   </script>
 </body>
 </html>
+s
