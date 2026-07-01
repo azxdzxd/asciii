@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>키 기반 문자열 저장/불러오기</title>
+  <title>번호 기반 문자열 저장/불러오기</title>
   <style>
     #ioBox {
       white-space: pre-wrap;
@@ -12,19 +12,16 @@
       width: 400px;
       min-height: 150px;
     }
-    #keyInput, #indexInput {
+    #keyInput {
       margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>키 기반 문자열 저장/불러오기</h1>
+  <h1>번호 기반 문자열 저장/불러오기</h1>
 
-  <!-- 키 입력 -->
-  <input id="keyInput" type="text" placeholder="키 입력"><br>
-
-  <!-- 문자열 번호 입력 -->
-  <input id="indexInput" type="number" placeholder="문자열 번호 (불러오기용)"><br>
+  <!-- 번호 입력 -->
+  <input id="keyInput" type="text" placeholder="문자열 번호 입력"><br>
 
   <!-- 문자열 입력/출력 -->
   <textarea id="ioBox" rows="8" cols="50" placeholder="저장할 문자열 입력 또는 불러온 결과 표시"></textarea><br>
@@ -49,12 +46,9 @@
 
     async function getString() {
       const key = document.getElementById("keyInput").value;
-      const index = document.getElementById("indexInput").value;
-      const body = key + "\n" + index;
-
       const res = await fetch(baseUrl + "/get", {
         method: "POST",
-        body: body
+        body: key
       });
       document.getElementById("ioBox").value = await res.text();
     }
